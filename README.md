@@ -1,6 +1,6 @@
-# flake
+# retryflake
 
-[![ci](https://github.com/intertermux-code/flake/actions/workflows/ci.yml/badge.svg)](https://github.com/intertermux-code/flake/actions)
+[![ci](https://github.com/intertermux-code/retryflake/actions/workflows/ci.yml/badge.svg)](https://github.com/intertermux-code/retryflake/actions)
 
 Run flaky commands with retries, exponential backoff, and jitter. One
 binary, zero dependencies — for the CI step that fails every third run, the
@@ -8,16 +8,16 @@ deploy script that hits a rate limit, the `pip install` that drops once a
 week.
 
 ```sh
-pip install flake
+pip install retryflake
 
-flake --retries 5 -- make test
-flake --retries 5 --timeout 120 -- ./deploy.sh
-flake --retry-on "rate limit" --retry-on "429" -- ./call-api.sh
-flake --retries 0 -- ./must-pass-once.sh
+retryflake --retries 5 -- make test
+retryflake --retries 5 --timeout 120 -- ./deploy.sh
+retryflake --retry-on "rate limit" --retry-on "429" -- ./call-api.sh
+retryflake --retries 0 -- ./must-pass-once.sh
 ```
 
 Output streams live to your terminal exactly as the command produces it;
-flake's own chatter (`attempt 2/4 failed (exit 1), retrying in 3.2s`) goes
+retryflake's own chatter (`attempt 2/4 failed (exit 1), retrying in 3.2s`) goes
 to stderr, and `--quiet` silences it.
 
 ## Behavior
@@ -44,7 +44,7 @@ to stderr, and `--quiet` silences it.
 | `--jitter` / `--no-jitter` | on | full jitter on the backoff |
 | `--timeout S` | none | kill each attempt after S seconds |
 | `--retry-on SUB` | none | only retry when output contains SUB |
-| `--quiet` | off | suppress flake's stderr chatter |
+| `--quiet` | off | suppress retryflake's stderr chatter |
 
 POSIX only (Linux, macOS). Python 3.9+.
 

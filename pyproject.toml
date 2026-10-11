@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "flake"
+name = "retryflake"
 version = "0.1.0"
 description = "Run flaky commands with retries, exponential backoff, jitter, and timeouts"
 readme = "README.md"
@@ -25,11 +25,11 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/intertermux-code/flake"
-Issues = "https://github.com/intertermux-code/flake/issues"
+Homepage = "https://github.com/intertermux-code/retryflake"
+Issues = "https://github.com/intertermux-code/retryflake/issues"
 
 [project.scripts]
-flake = "flake:main"
+retryflake = "retryflake:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

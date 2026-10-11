@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-flake — run flaky commands with retries, exponential backoff, and jitter.
+retryflake — run flaky commands with retries, exponential backoff, and jitter.
 
-    flake --retries 5 --timeout 60 -- make test
-    flake --retry-on "rate limit" --retry-on "429" -- deploy.sh
-    flake --retries 0 -- ./must-pass-once.sh
+    retryflake --retries 5 --timeout 60 -- make test
+    retryflake --retry-on "rate limit" --retry-on "429" -- deploy.sh
+    retryflake --retries 0 -- ./must-pass-once.sh
 
 Output streams live to your terminal while a bounded tail is kept for
 --retry-on matching. Standard library only.
@@ -26,7 +26,7 @@ TERM_GRACE_SECS = 5
 
 
 def die(msg, code=1):
-    print(f"flake: error: {msg}", file=sys.stderr)
+    print(f"retryflake: error: {msg}", file=sys.stderr)
     sys.exit(code)
 
 
@@ -116,7 +116,7 @@ def backoff_delay(base, max_delay, attempt, jitter):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(
-        prog="flake",
+        prog="retryflake",
         description="Run a flaky command with retries, exponential backoff, and jitter.")
     ap.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
     ap.add_argument("--retries", type=int, default=3, help="retries after the first attempt (default: 3)")
@@ -128,7 +128,7 @@ def main(argv=None):
     ap.add_argument("--timeout", type=float, default=None, help="kill each attempt after N seconds")
     ap.add_argument("--retry-on", action="append", default=[],
                     help="only retry when output contains this substring (repeatable)")
-    ap.add_argument("--quiet", action="store_true", help="suppress flake's own stderr chatter")
+    ap.add_argument("--quiet", action="store_true", help="suppress retryflake's own stderr chatter")
     ap.add_argument("cmd", nargs=argparse.REMAINDER, help="command to run (after --)")
     args = ap.parse_args(argv)
 
@@ -142,7 +142,7 @@ def main(argv=None):
 
     def log(msg):
         if not args.quiet:
-            print(f"flake: {msg}", file=sys.stderr)
+            print(f"retryflake: {msg}", file=sys.stderr)
 
     last_rc = 1
     for attempt in range(args.retries + 1):

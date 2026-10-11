@@ -1,4 +1,4 @@
-"""flake tests. Run: python -m pytest tests/ -x -q"""
+"""retryflake tests. Run: python -m pytest tests/ -x -q"""
 import os
 import subprocess
 import sys
@@ -6,7 +6,7 @@ import time
 
 import pytest
 
-BIN = [sys.executable, "-m", "flake"]
+BIN = [sys.executable, "-m", "retryflake"]
 
 
 def run(*args, **kwargs):
@@ -106,4 +106,4 @@ def test_quiet(tmp_path):
     marker = tmp_path / "ticks"
     r = run("--quiet", "--retries", "1", "--delay", "0.1", "--", *counter_script(marker, 99), timeout=30)
     assert r.returncode == 1
-    assert "flake:" not in r.stderr
+    assert "retryflake:" not in r.stderr
