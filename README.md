@@ -1,6 +1,7 @@
 # retryflake
 
 [![ci](https://github.com/intertermux-code/retryflake/actions/workflows/ci.yml/badge.svg)](https://github.com/intertermux-code/retryflake/actions)
+[![pypi](https://img.shields.io/pypi/v/retryflake.svg)](https://pypi.org/project/retryflake/)
 
 Run flaky commands with retries, exponential backoff, and jitter. One
 binary, zero dependencies — for the CI step that fails every third run, the
